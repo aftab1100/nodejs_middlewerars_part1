@@ -1,0 +1,34 @@
+//1.Import area
+//const something=require(somelibarary)
+const express = require("express");
+const app = express();
+
+/* dotenv library install */
+require("dotenv").config();
+console.log(process.env); // remove this after you've confirmed it is working
+
+let name;
+app.get(
+  "/students",
+  (req, res, next) => {
+    console.log("inside middlewarefunction_1", req, query, name);
+    req.query.name = "aftab";
+
+    res.json({
+      message: "middlewares function",
+    });
+    next();
+  },
+  (req, res) => {
+    console.log("inside cbfn ", req.query.name);
+    let name = req.query.name;
+    res.json({
+      message: "hello nodejs developer",
+    });
+  }
+);
+
+let PORT = process.env.PORTNO;
+app.listen(PORT, () => {
+  console.log("The Server is running " + PORT);
+});
